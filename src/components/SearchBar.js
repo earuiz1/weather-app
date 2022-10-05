@@ -31,24 +31,35 @@ const SearchBar = (props) => {
       description: data.weather[0].description,
       current_temp: data.main.temp,
       icon: data.weather[0].icon,
+      feelsLikeTemp: data.main.feels_like,
+      maxTemp: data.main.temp_max,
+      minTemp: data.main.temp_min,
+      humidity: data.main.humidity,
+      pressure: data.main.pressure,
+      sunrise: data.sys.sunrise,
+      sunset: data.sys.sunset,
+      cloudiness: data.clouds.all,
+      visibility: data.visibility,
+      windSpeed: data.wind.speed,
     };
 
-    // console.log(trasnformedWeather);
+    console.log(trasnformedWeather);
 
     props.onSave(trasnformedWeather);
   };
 
   return (
     <React.Fragment>
-      <div className="flex justify-center w-3/4 mx-auto py-4">
+      <div className="flex justify-center w-3/4 mx-auto my-8">
         <input
-          className="border-black border-2 min-w-full py-2 px-2"
+          className="bg-gray-100 border-black border-2 rounded-l-lg 
+          outline-0 min-w-full py-2 px-2"
           type="text"
           placeholder="Search..."
           onChange={changeHandler}
         />
         <button
-          className="bg-gray-800 text-slate-50 px-3"
+          className="bg-gray-800 text-slate-50 rounded-r-lg px-3"
           onClick={fecthWeatherHandler}
         >
           Search

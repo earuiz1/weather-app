@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Nav from "./components/Nav/Nav";
 import SearchBar from "./components/SearchBar";
 import CurrentWeather from "./components/CurrentWeather";
+import ExtendedDetails from "./components/ExtendedDetails";
 
 const App = () => {
   /* Creating a state for the weatherInfo and showWeather. */
@@ -22,6 +23,9 @@ const App = () => {
       <SearchBar onSave={savedInfo} />
       <section>
         {showWeather && <CurrentWeather weatherInfo={weatherInfo} />}
+      </section>
+      <section>
+        {showWeather && <ExtendedDetails weatherInfo={weatherInfo} />}
       </section>
     </React.Fragment>
   );

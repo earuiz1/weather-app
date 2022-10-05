@@ -5,21 +5,21 @@ const CurrentWeather = (props) => {
 
   return (
     <React.Fragment>
-      <div className="flex flex-col align-center bg-black opacity-90 rounded-lg max-w-3xl mx-auto py-3 px-3 gap-4 ">
-        <div className="flex justify-center">
+      <div className="flex flex-row justify-between bg-black opacity-90 rounded-lg max-w-xl mx-auto py-10 px-6">
+        <div className="flex flex-col justify-center items-center gap-5">
           <h3 className="text-slate-50 text-4xl font-bold">{`${props.weatherInfo.city} , ${props.weatherInfo.country}`}</h3>
-          <img
-            src={`http://openweathermap.org/img/wn/${props.weatherInfo.icon}.png`}
-            alt="weather_icon"
-          />
+          <div className="flex flex-row justify-around items-center">
+            <span className="text-slate-50 font-semibold text-xl a">
+              {props.weatherInfo.description}
+            </span>
+            <img
+              src={`http://openweathermap.org/img/wn/${props.weatherInfo.icon}.png`}
+              alt="weather_icon"
+            />
+          </div>
         </div>
-        <div className="flex justify-center">
-          <span className="text-slate-50 font-semibold text-base">
-            {props.weatherInfo.description}
-          </span>
-        </div>
-        <div className="flex justify-center">
-          <span className="text-slate-50 font-semibold text-5xl">
+        <div className="flex justify-center items-center">
+          <span className="text-slate-50 font-semibold text-7xl">
             {`${updatedTCurrentTemp} °C`}
           </span>
         </div>
