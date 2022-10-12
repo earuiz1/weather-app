@@ -13,54 +13,28 @@ const SearchBar = (props) => {
     setQuery(event.target.value);
   };
 
-  const fecthWeatherHandler = async () => {
-    /* Fetching the data from the API. */
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`
-    );
-
-    /* Converting the response into a JSON object. */
-    const data = await response.json();
-    console.log(data);
-
-    /* Creating a new object with the data that we want to use. */
-    const trasnformedWeather = {
-      id: data.id,
-      city: data.name,
-      country: data.sys.country,
-      description: data.weather[0].description,
-      current_temp: data.main.temp,
-      icon: data.weather[0].icon,
-      feelsLikeTemp: data.main.feels_like,
-      maxTemp: data.main.temp_max,
-      minTemp: data.main.temp_min,
-      humidity: data.main.humidity,
-      pressure: data.main.pressure,
-      sunrise: data.sys.sunrise,
-      sunset: data.sys.sunset,
-      cloudiness: data.clouds.all,
-      visibility: data.visibility,
-      windSpeed: data.wind.speed,
-    };
-
-    console.log(trasnformedWeather);
-
-    props.onSave(trasnformedWeather);
+  const clickHandler = () => {
+    if (query.trim().length > 0) {
+      props.onFetchWeather(query, "metric");
+      setQuery("");
+    }
   };
 
   return (
     <React.Fragment>
       <div className="flex justify-center w-3/4 mx-auto my-8">
         <input
-          className="bg-gray-100 border-black border-2 rounded-l-lg 
-          outline-0 min-w-full py-2 px-2"
+          className="bg-transparent border-black border-r-0 border-2 rounded-l-lg 
+          outline-0 min-w-full text-slate-50 py-2 px-2"
           type="text"
-          placeholder="Search..."
+          placeholder="Search for a city..."
           onChange={changeHandler}
+          value={query}
+          required
         />
         <button
           className="bg-gray-800 text-slate-50 rounded-r-lg px-3"
-          onClick={fecthWeatherHandler}
+          onClick={clickHandler}
         >
           Search
         </button>
