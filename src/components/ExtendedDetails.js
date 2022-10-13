@@ -10,56 +10,92 @@ import {
   BsWind,
 } from "react-icons/bs";
 
-import { MdVisibility } from "react-icons/md";
+const ExtendedDetails = (props) => {
+  const details = [
+    {
+      id: 1,
+      icon: <BsThermometerSun className="text-white" size={22} />,
+      title: "Feels Like: ",
+      action: props.weatherInfo.feelsLikeTemp,
+      symbol: " °C",
+    },
+    {
+      id: 2,
+      icon: <FaTemperatureHigh className="text-white" size={22} />,
+      title: "High: ",
+      action: props.weatherInfo.maxTemp,
+      symbol: " °C",
+    },
+    {
+      id: 3,
+      icon: <FaTemperatureLow className="text-white" size={22} />,
+      title: "Low: ",
+      action: props.weatherInfo.minTemp,
+      symbol: " °C",
+    },
+    {
+      id: 4,
+      icon: <WiHumidity className="text-white" size={28} />,
+      title: "Humidity: ",
+      action: props.weatherInfo.humidity,
+      symbol: " %",
+    },
+    {
+      id: 5,
+      icon: <BsFillSunriseFill className="text-white" size={25} />,
+      title: "Sunrise: ",
+      action: props.weatherInfo.sunrise,
+      symbol: "",
+    },
+    {
+      id: 6,
+      icon: <BsFillSunsetFill className="text-white" size={25} />,
+      title: "Sunset: ",
+      action: props.weatherInfo.sunset,
+      symbol: "",
+    },
+    {
+      id: 7,
+      icon: <WiBarometer className="text-white" size={30} />,
+      title: "Pressure: ",
+      action: props.weatherInfo.pressure,
+      symbol: " inHg",
+    },
+    {
+      id: 8,
+      icon: <BsFillCloudFill className="text-white" size={24} />,
+      title: "Cloudiness: ",
+      action: props.weatherInfo.cloudiness,
+      symbol: " %",
+    },
+    {
+      id: 9,
+      icon: <BsWind className="text-white" size={25} />,
+      title: "Wind: ",
+      action: props.weatherInfo.windSpeed,
+      symbol: " mph",
+    },
+  ];
 
-const CurrentWeatherDetails = (props) => {
   return (
     <React.Fragment>
-      {/* Container */}
-      <div className="grid grid-cols-5 max-w-5xl mx-auto mt-10 gap-3">
-        <div className="flex justify-evenly items-center bg-black py-5 rounded-lg">
-          <BsThermometerSun className="text-white" size={22} />
-          <span className="text-slate-100 font-medium text-xs">{`Feels Like: ${props.weatherInfo.feelsLikeTemp} °C`}</span>
-        </div>
-        <div className="flex justify-evenly items-center bg-black py-5 rounded-lg">
-          <FaTemperatureHigh className="text-white" size={22} />
-          <span className="text-slate-100 font-medium text-xs">{`High: ${props.weatherInfo.maxTemp} °C`}</span>
-        </div>
-        <div className="flex justify-evenly items-center bg-black py-5 rounded-lg">
-          <FaTemperatureLow className="text-white" size={22} />
-          <span className="text-slate-100 font-medium text-xs">{`Low: ${props.weatherInfo.minTemp} °C`}</span>
-        </div>
-        <div className="flex justify-evenly items-center bg-black py-5 rounded-lg">
-          <WiHumidity className="text-white" size={28} />
-          <span className="text-slate-100 font-medium text-xs">{`Humidity: ${props.weatherInfo.humidity} %`}</span>
-        </div>
-        <div className="flex justify-evenly items-center bg-black py-5 rounded-lg">
-          <BsFillSunriseFill className="text-white" size={28} />
-          <span className="text-slate-100 font-medium text-xs">{`Sunrise: ${props.weatherInfo.sunrise}`}</span>
-        </div>
-        <div className="flex justify-evenly items-center bg-black py-5 rounded-lg">
-          <BsFillSunsetFill className="text-white" size={28} />
-          <span className="text-slate-100 font-medium text-xs">{`Sunset: ${props.weatherInfo.sunset}`}</span>
-        </div>
-        <div className="flex justify-evenly items-center bg-black py-5 rounded-lg">
-          <WiBarometer className="text-white" size={34} />
-          <span className="text-slate-100 font-medium text-xs">{`Pressure: ${props.weatherInfo.pressure} inHg`}</span>
-        </div>
-        <div className="flex justify-evenly items-center bg-black py-5 rounded-lg">
-          <BsFillCloudFill className="text-white" size={24} />
-          <span className="text-slate-100 font-medium text-xs">{`Cloudiness: ${props.weatherInfo.cloudiness} %`}</span>
-        </div>
-        <div className="flex justify-evenly items-center bg-black py-5 rounded-lg">
-          <MdVisibility className="text-white" size={28} />
-          <span className="text-slate-100 font-medium text-xs">{`Visibility: ${props.weatherInfo.visibility} mi`}</span>
-        </div>
-        <div className="flex justify-evenly items-center bg-black py-5 rounded-lg">
-          <BsWind className="text-white" size={28} />
-          <span className="text-slate-100 font-medium text-xs">{`Wind: ${props.weatherInfo.windSpeed} mph`}</span>
-        </div>
-      </div>
+      {details.map((detail) => {
+        return (
+          <div
+            key={detail.id}
+            className="flex justify-evenly items-center py-5 rounded-lg"
+          >
+            <span>{detail.icon}</span>
+            <span className="text-slate-100 font-medium text-xs2">
+              {detail.title}
+              {detail.action}
+              {detail.symbol}
+            </span>
+          </div>
+        );
+      })}
     </React.Fragment>
   );
 };
 
-export default CurrentWeatherDetails;
+export default ExtendedDetails;

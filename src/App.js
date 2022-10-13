@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Nav from "./components/Nav/Nav";
 import SearchBar from "./components/SearchBar";
 import CurrentWeather from "./components/CurrentWeather";
-import ExtendedDetails from "./components/ExtendedDetails";
 import { WEATHER_API_URL } from "./components/api";
 
 const App = () => {
@@ -30,6 +29,13 @@ const App = () => {
       id: data.id,
       city: data.name,
       country: data.sys.country,
+      day: new Date(data.dt * 1000).toLocaleString("en-US", {
+        weekday: "long",
+      }),
+      date: new Date(data.dt * 1000).toLocaleString("en-US", {
+        month: "long",
+        day: "numeric",
+      }),
       description: data.weather[0].description,
       current_temp: Math.round(data.main.temp),
       icon: data.weather[0].icon,
@@ -69,9 +75,6 @@ const App = () => {
       )}
       <section>
         {showWeather && <CurrentWeather weatherInfo={weatherInfo} />}
-      </section>
-      <section>
-        {showWeather && <ExtendedDetails weatherInfo={weatherInfo} />}
       </section>
     </React.Fragment>
   );
