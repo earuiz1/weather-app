@@ -6,9 +6,9 @@ const CurrentWeather = (props) => {
   return (
     <React.Fragment>
       {/* Container */}
-      <div className="flex flex-row justify-between bg-black max-w-2xl rounded-xl mx-auto">
+      <div className="flex flex-row justify-between bg-slate-900 max-w-2xl border-2 border-slate-200 rounded-xl mx-auto">
         {/* Inner Container Left */}
-        <div className="flex flex-col text-slate-50 items-start pl-5 pr-12 py-5 border-r-2 border-slate-500">
+        <div className="flex flex-col text-slate-50 items-start pl-5 pr-12 py-5 bg-cover bg-[url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80')] rounded-xl">
           {/* Top Left Inner Container*/}
           <div className="flex flex-col">
             <span className="text-2xl font-bold">{props.weatherInfo.day}</span>
@@ -41,7 +41,7 @@ const CurrentWeather = (props) => {
           </div>
         </div>
         {/* Inner Right Container */}
-        <div className="grid grid-cols-3 content-center gap-x-2 pr-5">
+        <div className="grid grid-cols-3 content-center grow gap-x-2 pr-5">
           <ExtendedDetails weatherInfo={props.weatherInfo} />
         </div>
       </div>
