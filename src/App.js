@@ -26,11 +26,7 @@ const App = () => {
         const allCurrentWeatherData = allData[0];
         const allForecastData = allData[1];
 
-        console.log("Current Weather Data: ", allCurrentWeatherData);
-        console.log("Forecast Data: ", allForecastData);
-
         const transformedWeatherData = {
-          id: allCurrentWeatherData.data.id,
           city: allCurrentWeatherData.data.name,
           country: allCurrentWeatherData.data.sys.country,
           day: new Date(allCurrentWeatherData.data.dt * 1000).toLocaleString(
@@ -74,43 +70,16 @@ const App = () => {
           forecastItem.dt_txt.match("12:00:00")
         );
 
-        console.log("Filtered Items: ", filteredItems);
-
-        const trasnformedForecastData = [
-          {
-            id: "f1",
-            maxTemp: Math.round(filteredItems[0].main.temp_max),
-            minTemp: Math.round(filteredItems[0].main.temp_min),
-            icon: filteredItems[0].weather[0].icon,
-          },
-          {
-            id: "f2",
-            maxTemp: Math.round(filteredItems[1].main.temp_max),
-            minTemp: Math.round(filteredItems[1].main.temp_min),
-            icon: filteredItems[1].weather[0].icon,
-          },
-          {
-            id: "f3",
-            maxTemp: Math.round(filteredItems[2].main.temp_max),
-            minTemp: Math.round(filteredItems[2].main.temp_min),
-            icon: filteredItems[2].weather[0].icon,
-          },
-          {
-            id: "f4",
-            maxTemp: Math.round(filteredItems[3].main.temp_max),
-            minTemp: Math.round(filteredItems[3].main.temp_min),
-            icon: filteredItems[3].weather[0].icon,
-          },
-          {
-            id: "f5",
-            maxTemp: Math.round(filteredItems[4].main.temp_max),
-            minTemp: Math.round(filteredItems[4].main.temp_min),
-            icon: filteredItems[4].weather[0].icon,
-          },
-        ];
-
-        console.log(trasnformedForecastData);
-        console.log(transformedWeatherData);
+        const trasnformedForecastData = filteredItems.map((item) => {
+          return {
+            id: Math.random().toString(),
+            temperature: Math.round(item.main.temp),
+            day: new Date(item.dt * 1000).toLocaleString("en-US", {
+              weekday: "long",
+            }),
+            icon: item.weather[0].icon,
+          };
+        });
 
         setCity(query);
         setWeatherInfo(transformedWeatherData);
@@ -119,7 +88,6 @@ const App = () => {
       })
     );
   };
-
   return (
     <React.Fragment>
       <header>
@@ -139,7 +107,9 @@ const App = () => {
       <section>
         {showWeather && <CurrentWeather weatherInfo={weatherInfo} />}
       </section>
-      <section>{showWeather && <ForecastDetails />}</section>
+      <section>
+        {showWeather && <ForecastDetails forecast={forecast} />}
+      </section>
     </React.Fragment>
   );
 };
