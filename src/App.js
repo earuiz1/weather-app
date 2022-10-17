@@ -8,7 +8,7 @@ import axios from "axios";
 
 const App = () => {
   /* Creating a state variable called weatherInfo, forecast, showWeather, and city. */
-  const [weatherInfo, setWeatherInfo] = useState(null);
+  const [weather, setWeather] = useState(null);
   const [forecast, setForcast] = useState(null);
   const [showWeather, setShowWeather] = useState(false);
   const [city, setCity] = useState(null);
@@ -82,7 +82,7 @@ const App = () => {
         });
 
         setCity(query);
-        setWeatherInfo(transformedWeatherData);
+        setWeather(transformedWeatherData);
         setForcast(trasnformedForecastData);
         setShowWeather(true);
       })
@@ -104,9 +104,7 @@ const App = () => {
       ) : (
         <SearchBar onFetchWeather={fetchWeatherData} />
       )}
-      <section>
-        {showWeather && <CurrentWeather weatherInfo={weatherInfo} />}
-      </section>
+      <section>{showWeather && <CurrentWeather weather={weather} />}</section>
       <section>
         {showWeather && <ForecastDetails forecast={forecast} />}
       </section>

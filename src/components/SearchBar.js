@@ -25,7 +25,7 @@ const SearchBar = (props) => {
       <div className="flex justify-center w-3/4 mx-auto my-8">
         <input
           className="bg-transparent border-black border-r-0 border-2 rounded-l-lg 
-          outline-0 min-w-full text-slate-50 py-2 px-2"
+          outline-0 min-w-full text-slate-50 py-2 px-2 font-semibold"
           type="text"
           placeholder="Search for a city..."
           onChange={changeHandler}

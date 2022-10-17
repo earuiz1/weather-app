@@ -15,10 +15,10 @@ const Nav = (props) => {
   };
   return (
     <React.Fragment>
-      <nav className="flex justify-between align-center bg-gray-800 py-5 px-4">
+      <nav className="flex justify-between align-center bg-slate-900 py-5 px-4">
         <div className="flex gap-3">
-          <TiWeatherPartlySunny className="text-white" size={28} />
-          <h1 className="text-2xl text-slate-50 font-bold">Weather App </h1>
+          <TiWeatherPartlySunny className="text-white" size={34} />
+          <h1 className="text-3xl text-slate-50 font-extrabold">Weather App</h1>
         </div>
         {props.showWeather && (
           <div className="flex gap-3">
