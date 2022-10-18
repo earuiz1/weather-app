@@ -15,7 +15,7 @@ const ExtendedDetails = (props) => {
     {
       id: Math.random().toString(),
       icon: <BsThermometerSun className="text-white" size={19} />,
-      title: "Feels Like: ",
+      title: "Feels: ",
       action: props.weather.feelsLikeTemp,
       symbol: " °C",
     },
@@ -43,28 +43,28 @@ const ExtendedDetails = (props) => {
     {
       id: Math.random().toString(),
       icon: <BsFillSunriseFill className="text-white" size={22} />,
-      title: "Sunrise: ",
+      title: "",
       action: props.weather.sunrise,
       symbol: "",
     },
     {
       id: Math.random().toString(),
       icon: <BsFillSunsetFill className="text-white" size={22} />,
-      title: "Sunset: ",
+      title: "",
       action: props.weather.sunset,
       symbol: "",
     },
     {
       id: Math.random().toString(),
       icon: <WiBarometer className="text-white" size={25} />,
-      title: "Pressure: ",
+      title: "",
       action: props.weather.pressure,
       symbol: " inHg",
     },
     {
       id: Math.random().toString(),
       icon: <BsFillCloudFill className="text-white" size={22} />,
-      title: "Cloudiness: ",
+      title: "Clouds: ",
       action: props.weather.cloudiness,
       symbol: " %",
     },
@@ -83,7 +83,7 @@ const ExtendedDetails = (props) => {
         return (
           <div
             key={detail.id}
-            className="flex justify-evenly items-center py-5 rounded-lg"
+            className="flex justify-around items-center py-5"
           >
             <span>{detail.icon}</span>
             <span className="text-slate-100 font-medium text-xs2">

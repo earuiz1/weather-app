@@ -22,10 +22,10 @@ const SearchBar = (props) => {
 
   return (
     <React.Fragment>
-      <div className="flex justify-center w-3/4 mx-auto my-8">
+      <div className="flex justify-center bg-slate-900/30 border-slate-50 border-1 rounded-xl mx-5 py-4 px-3">
         <input
-          className="bg-transparent border-black border-r-0 border-2 rounded-l-lg 
-          outline-0 min-w-full text-slate-50 py-2 px-2 font-semibold"
+          className="bg-transparent w-full border-black border-r-0 border-1 rounded-l-lg 
+          outline-0  text-slate-50 py-2 px-2 font-semibold"
           type="text"
           placeholder="Search for a city..."
           onChange={changeHandler}

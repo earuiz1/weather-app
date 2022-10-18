@@ -7,6 +7,15 @@ module.exports = {
       fontSize: {
         xs2: "0.625rem",
       },
+      colors: {
+        glass: "#111928",
+      },
+      screens: {
+        xs: "320px",
+      },
+      borderWidth: {
+        1: "1px",
+      },
     },
   },
   plugins: [],

@@ -97,17 +97,38 @@ const App = () => {
           city={city}
         />
       </header>
-      {!showWeather ? (
+      {!showWeather && (
+        <div className="flex justify-center items-center h-screen">
+          <SearchBar onFetchWeather={fetchWeatherData} />
+        </div>
+      )}
+      {/* {!showWeather ? (
         <div className="flex items-center h-screen">
           <SearchBar onFetchWeather={fetchWeatherData} />
         </div>
       ) : (
         <SearchBar onFetchWeather={fetchWeatherData} />
-      )}
-      <section>{showWeather && <CurrentWeather weather={weather} />}</section>
+      )} */}
+      {/* <section>{showWeather && <CurrentWeather weather={weather} />}</section>
       <section>
         {showWeather && <ForecastDetails forecast={forecast} />}
-      </section>
+      </section> */}
+
+      {showWeather && (
+        <div className="flex items-center justify-center min-w-full min-h-screen">
+          <div className="flex flex-col items-center w-96 gap-6 py-6">
+            <div className="w-full">
+              <SearchBar onFetchWeather={fetchWeatherData} />
+            </div>
+            <section className="w-full">
+              <CurrentWeather weather={weather} />
+            </section>
+            <section className="w-full">
+              <ForecastDetails forecast={forecast} />
+            </section>
+          </div>
+        </div>
+      )}
     </React.Fragment>
   );
 };

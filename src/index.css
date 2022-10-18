@@ -2,8 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 body{
-	background: url(https://images.unsplash.com/photo-1487621167305-5d248087c724?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80) center center/cover no-repeat local;
+	/* background: url(https://images.unsplash.com/photo-1487621167305-5d248087c724?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80) center/cover no-repeat local; */
+    /* overflow: hidden; */
+
+    /* Created with https://www.css-gradient.com */
+    /* Created with https://www.css-gradient.com */
+    /* background: #41015F;
+    background: -webkit-linear-gradient(top left, #41015F, #1B084C);
+    background: -moz-linear-gradient(top left, #41015F, #1B084C);
+    background: linear-gradient(to bottom right, #41015F, #1B084C); */
+
+    background: linear-gradient(132deg, #FC415A, #591BC5, #212335);
+    background-size: 400% 400%;
+    animation: Gradient 25s ease infinite;
     min-height: 100vh;
-    overflow: hidden;
+    width: 100%;
 }
+
+/* Animate Background*/
+@keyframes Gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
