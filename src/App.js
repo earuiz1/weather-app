@@ -115,11 +115,11 @@ const App = () => {
       </section> */}
 
       {showWeather && (
-        <div className="flex items-center justify-center min-w-full min-h-screen">
-          <div className="flex flex-col items-center w-96 gap-6 py-6">
-            <div className="w-full">
-              <SearchBar onFetchWeather={fetchWeatherData} />
-            </div>
+        <div>
+          <div className="w-96 lg:w-4/5 md:w-4/5 mx-auto mt-12">
+            <SearchBar onFetchWeather={fetchWeatherData} />
+          </div>
+          <div className="flex flex-col lg:flex-row md:flex-row w-96 lg:w-4/5 md:w-4/5 gap-6 py-6 mx-auto">
             <section className="w-full">
               <CurrentWeather weather={weather} />
             </section>

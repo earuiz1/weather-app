@@ -36,7 +36,7 @@ const ForecastDetails = (props) => {
 
     <React.Fragment>
       {/* Main Container */}
-      <div className="flex flex-col bg-slate-900/50 border-1 border-slate-50/70 rounded-xl mx-5">
+      <div className="flex flex-col bg-slate-900/50 border-1 border-slate-50/70 min-w-[250px] rounded-xl mx-5">
         {/* Main Container Title */}
         <div className="flex justify-center border-b-2 border-slate-50/10 py-2 px-2">
           <span className="text-slate-50 font-bold text-2xl">

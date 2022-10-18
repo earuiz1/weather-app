@@ -49,7 +49,7 @@ const CurrentWeather = (props) => {
 
     <React.Fragment>
       {/* Container */}
-      <div className="flex flex-col bg-slate-900/50 border-1 border-slate-50/70 rounded-xl mx-5">
+      <div className="flex flex-col bg-slate-900/50 border-1 min-w-[340px] border-slate-50/70 rounded-xl mx-5">
         {/* Inner Container Left */}
         <div className="flex flex-row justify-between items-center text-slate-50 bg-cover bg-[url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80')] rounded-xl px-4 py-12">
           {/* Top Left Inner Container*/}
