@@ -98,8 +98,10 @@ const App = () => {
         />
       </header>
       {!showWeather && (
-        <div className="flex justify-center items-center h-screen">
-          <SearchBar onFetchWeather={fetchWeatherData} />
+        <div className="flex justify-center items-center w-full h-screen">
+          <div className="w-11/12">
+            <SearchBar onFetchWeather={fetchWeatherData} />
+          </div>
         </div>
       )}
       {/* {!showWeather ? (
@@ -116,10 +118,10 @@ const App = () => {
 
       {showWeather && (
         <div>
-          <div className="w-96 lg:w-4/5 md:w-4/5 mx-auto mt-12">
+          <div className="w-96 lg:w-11/12 md:w-11/12 mx-auto mt-12">
             <SearchBar onFetchWeather={fetchWeatherData} />
           </div>
-          <div className="flex flex-col lg:flex-row md:flex-row w-96 lg:w-4/5 md:w-4/5 gap-6 py-6 mx-auto">
+          <div className="flex flex-col lg:flex-row md:flex-row w-96 lg:w-11/12 md:w-11/12 gap-6 py-6 mx-auto">
             <section className="w-full">
               <CurrentWeather weather={weather} />
             </section>
