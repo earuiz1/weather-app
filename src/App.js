@@ -12,6 +12,10 @@ const App = () => {
   const [forecast, setForcast] = useState(null);
   const [showWeather, setShowWeather] = useState(false);
   const [city, setCity] = useState(null);
+  const [isError, setIsError] = useState({
+    status: false,
+    msg: null,
+  });
 
   const fetchWeatherData = (query, unit) => {
     //API calls
@@ -21,72 +25,90 @@ const App = () => {
     const getCurrentWeather = axios.get(currentWeatherAPICall);
     const getForecast = axios.get(forecastAPICall);
 
-    axios.all([getCurrentWeather, getForecast]).then(
-      axios.spread((...allData) => {
-        const allCurrentWeatherData = allData[0];
-        const allForecastData = allData[1];
+    axios
+      .all([getCurrentWeather, getForecast])
+      .then(
+        axios.spread((...allData) => {
+          const allCurrentWeatherData = allData[0];
+          const allForecastData = allData[1];
 
-        const transformedWeatherData = {
-          city: allCurrentWeatherData.data.name,
-          country: allCurrentWeatherData.data.sys.country,
-          day: new Date(allCurrentWeatherData.data.dt * 1000).toLocaleString(
-            "en-US",
-            {
-              weekday: "long",
-            }
-          ),
-          date: new Date(allCurrentWeatherData.data.dt * 1000).toLocaleString(
-            "en-US",
-            {
-              month: "long",
-              day: "numeric",
-            }
-          ),
-          description: allCurrentWeatherData.data.weather[0].description,
-          current_temp: Math.round(allCurrentWeatherData.data.main.temp),
-          icon: allCurrentWeatherData.data.weather[0].icon,
-          feelsLikeTemp: Math.round(allCurrentWeatherData.data.main.feels_like),
-          maxTemp: Math.round(allCurrentWeatherData.data.main.temp_max),
-          minTemp: Math.round(allCurrentWeatherData.data.main.temp_min),
-          humidity: allCurrentWeatherData.data.main.humidity,
-          pressure: Math.round(
-            0.02953 * allCurrentWeatherData.data.main.pressure
-          ).toFixed(2),
-          sunrise: new Date(
-            1000 * allCurrentWeatherData.data.sys.sunrise
-          ).toLocaleTimeString(),
-          sunset: new Date(
-            1000 * allCurrentWeatherData.data.sys.sunset
-          ).toLocaleTimeString(),
-          cloudiness: allCurrentWeatherData.data.clouds.all,
-          visibility: Math.round(
-            allCurrentWeatherData.data.visibility / 1609.34
-          ),
-          windSpeed: Math.round(allCurrentWeatherData.data.wind.speed * 2.2369),
-        };
-
-        /* This is filtering the forecast data to only show the forecast for 12:00:00. */
-        const filteredItems = allForecastData.data.list.filter((forecastItem) =>
-          forecastItem.dt_txt.match("12:00:00")
-        );
-
-        const trasnformedForecastData = filteredItems.map((item) => {
-          return {
-            id: Math.random().toString(),
-            temperature: Math.round(item.main.temp),
-            day: new Date(item.dt * 1000).toLocaleString("en-US", {
-              weekday: "long",
-            }),
-            icon: item.weather[0].icon,
+          const transformedWeatherData = {
+            city: allCurrentWeatherData.data.name,
+            country: allCurrentWeatherData.data.sys.country,
+            day: new Date(allCurrentWeatherData.data.dt * 1000).toLocaleString(
+              "en-US",
+              {
+                weekday: "long",
+              }
+            ),
+            date: new Date(allCurrentWeatherData.data.dt * 1000).toLocaleString(
+              "en-US",
+              {
+                month: "long",
+                day: "numeric",
+              }
+            ),
+            description: allCurrentWeatherData.data.weather[0].description,
+            current_temp: Math.round(allCurrentWeatherData.data.main.temp),
+            icon: allCurrentWeatherData.data.weather[0].icon,
+            feelsLikeTemp: Math.round(
+              allCurrentWeatherData.data.main.feels_like
+            ),
+            maxTemp: Math.round(allCurrentWeatherData.data.main.temp_max),
+            minTemp: Math.round(allCurrentWeatherData.data.main.temp_min),
+            humidity: allCurrentWeatherData.data.main.humidity,
+            pressure: Math.round(
+              0.02953 * allCurrentWeatherData.data.main.pressure
+            ).toFixed(2),
+            sunrise: new Date(
+              1000 * allCurrentWeatherData.data.sys.sunrise
+            ).toLocaleTimeString(),
+            sunset: new Date(
+              1000 * allCurrentWeatherData.data.sys.sunset
+            ).toLocaleTimeString(),
+            cloudiness: allCurrentWeatherData.data.clouds.all,
+            visibility: Math.round(
+              allCurrentWeatherData.data.visibility / 1609.34
+            ),
+            windSpeed: Math.round(
+              allCurrentWeatherData.data.wind.speed * 2.2369
+            ),
           };
-        });
 
-        setCity(query);
-        setWeather(transformedWeatherData);
-        setForcast(trasnformedForecastData);
-        setShowWeather(true);
-      })
-    );
+          /* This is filtering the forecast data to only show the forecast for 12:00:00. */
+          const filteredItems = allForecastData.data.list.filter(
+            (forecastItem) => forecastItem.dt_txt.match("12:00:00")
+          );
+
+          const trasnformedForecastData = filteredItems.map((item) => {
+            return {
+              id: Math.random().toString(),
+              temperature: Math.round(item.main.temp),
+              day: new Date(item.dt * 1000).toLocaleString("en-US", {
+                weekday: "long",
+              }),
+              icon: item.weather[0].icon,
+            };
+          });
+
+          setIsError({
+            status: false,
+            msg: null,
+          });
+          setCity(query);
+          setWeather(transformedWeatherData);
+          setForcast(trasnformedForecastData);
+          setShowWeather(true);
+        })
+      )
+      .catch((error) => {
+        if (error.response.status === 404) {
+          setIsError({
+            status: true,
+            msg: "CITY NOT FOUND!!!",
+          });
+        }
+      });
   };
   return (
     <React.Fragment>
@@ -98,29 +120,25 @@ const App = () => {
         />
       </header>
       {!showWeather && (
-        <div className="flex justify-center items-center w-full h-screen">
-          <div className="w-11/12">
+        <div className="flex flex-col justify-center items-center w-full h-screen">
+          <div className="flex w-11/12">
             <SearchBar onFetchWeather={fetchWeatherData} />
           </div>
+          {isError.status && (
+            <span className="text-slate-50 text-lg">{isError.msg}</span>
+          )}
         </div>
       )}
-      {/* {!showWeather ? (
-        <div className="flex items-center h-screen">
-          <SearchBar onFetchWeather={fetchWeatherData} />
-        </div>
-      ) : (
-        <SearchBar onFetchWeather={fetchWeatherData} />
-      )} */}
-      {/* <section>{showWeather && <CurrentWeather weather={weather} />}</section>
-      <section>
-        {showWeather && <ForecastDetails forecast={forecast} />}
-      </section> */}
-
       {showWeather && (
-        <div>
-          <div className="w-96 lg:w-11/12 md:w-11/12 mx-auto mt-12">
+        <React.Fragment>
+          <div className="flex w-96 lg:w-11/12 md:w-11/12 mt-6 mx-auto">
             <SearchBar onFetchWeather={fetchWeatherData} />
           </div>
+          {isError.status && (
+            <div className="flex justify-center">
+              <span className="text-slate-50 text-lg">{isError.msg}</span>
+            </div>
+          )}
           <div className="flex flex-col lg:flex-row md:flex-row w-96 lg:w-11/12 md:w-11/12 gap-6 py-6 mx-auto">
             <section className="w-full">
               <CurrentWeather weather={weather} />
@@ -129,7 +147,7 @@ const App = () => {
               <ForecastDetails forecast={forecast} />
             </section>
           </div>
-        </div>
+        </React.Fragment>
       )}
     </React.Fragment>
   );

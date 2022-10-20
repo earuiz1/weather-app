@@ -56,7 +56,7 @@ const ExtendedDetails = (props) => {
     },
     {
       id: Math.random().toString(),
-      icon: <WiBarometer className="text-white" size={25} />,
+      icon: <WiBarometer className="text-white" size={28} />,
       title: "",
       action: props.weather.pressure,
       symbol: " inHg",
@@ -86,7 +86,7 @@ const ExtendedDetails = (props) => {
             className="flex justify-around items-center py-5"
           >
             <span>{detail.icon}</span>
-            <span className="text-slate-100 font-medium text-xs2">
+            <span className="text-slate-100 font-medium text-xs md:text-[14px] lg:text-[14px]">
               {detail.title}
               {detail.action}
               {detail.symbol}
