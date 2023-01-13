@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SearchBar = (props) => {
+const SearchBar = ({ onFetchWeather }) => {
   /* A hook that is used to store the value of the input field. */
   const [query, setQuery] = useState("");
 
@@ -15,7 +15,7 @@ const SearchBar = (props) => {
 
   const clickHandler = () => {
     if (query.trim().length > 0) {
-      props.onFetchWeather(query, "metric");
+      onFetchWeather(query, "metric", true);
       setQuery("");
     }
   };

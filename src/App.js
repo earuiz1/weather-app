@@ -16,8 +16,9 @@ const App = () => {
     status: false,
     msg: null,
   });
+  const [isDefaultUnit, setIsDefaultUnit] = useState(false);
 
-  const fetchWeatherData = (query, unit) => {
+  const fetchWeatherData = (query, unit, status) => {
     //API calls
     const currentWeatherAPICall = `${WEATHER_API_URL}/weather?q=${query}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=${unit}`;
     const forecastAPICall = `${WEATHER_API_URL}/forecast?q=${query}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=${unit}`;
@@ -96,6 +97,7 @@ const App = () => {
             msg: null,
           });
           setCity(query);
+          setIsDefaultUnit(status);
           setWeather(transformedWeatherData);
           setForcast(trasnformedForecastData);
           setShowWeather(true);
@@ -110,6 +112,7 @@ const App = () => {
         }
       });
   };
+
   return (
     <React.Fragment>
       <header>
@@ -117,6 +120,7 @@ const App = () => {
           showWeather={showWeather}
           onFetchWeather={fetchWeatherData}
           city={city}
+          isDefaultUnit={isDefaultUnit}
         />
       </header>
       {!showWeather && (
@@ -131,21 +135,29 @@ const App = () => {
       )}
       {showWeather && (
         <React.Fragment>
-          <div className="flex w-96 lg:w-11/12 md:w-11/12 mt-6 mx-auto">
-            <SearchBar onFetchWeather={fetchWeatherData} />
-          </div>
-          {isError.status && (
-            <div className="flex justify-center">
-              <span className="text-slate-50 text-lg">{isError.msg}</span>
+          <div className="lg:my-40 md:my-40 my-20">
+            <div className="flex w-96 lg:w-11/12 md:w-11/12 mx-auto">
+              <SearchBar onFetchWeather={fetchWeatherData} />
             </div>
-          )}
-          <div className="flex flex-col lg:flex-row md:flex-row w-96 lg:w-11/12 md:w-11/12 gap-6 py-6 mx-auto">
-            <section className="w-full">
-              <CurrentWeather weather={weather} />
-            </section>
-            <section className="w-full">
-              <ForecastDetails forecast={forecast} />
-            </section>
+            {isError.status && (
+              <div className="flex justify-center">
+                <span className="text-slate-50 text-lg">{isError.msg}</span>
+              </div>
+            )}
+            <div className="flex flex-col lg:flex-row md:flex-row w-96 lg:w-11/12 md:w-11/12 gap-6 py-6 mx-auto">
+              <section className="w-full">
+                <CurrentWeather
+                  weather={weather}
+                  isDefaultUnit={isDefaultUnit}
+                />
+              </section>
+              <section className="w-full">
+                <ForecastDetails
+                  forecast={forecast}
+                  isDefaultUnit={isDefaultUnit}
+                />
+              </section>
+            </div>
           </div>
         </React.Fragment>
       )}

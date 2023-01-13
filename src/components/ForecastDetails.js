@@ -1,6 +1,6 @@
 import React from "react";
 
-const ForecastDetails = (props) => {
+const ForecastDetails = ({ forecast, isDefaultUnit }) => {
   return (
     <React.Fragment>
       {/* Main Container */}
@@ -13,7 +13,7 @@ const ForecastDetails = (props) => {
         </div>
         {/* Forecast Item Container */}
         <div className="flex flex-col">
-          {props.forecast.map((item) => {
+          {forecast.map((item) => {
             return (
               <div
                 key={item.id}
@@ -25,7 +25,9 @@ const ForecastDetails = (props) => {
                   alt="weather_icon"
                   className="h-10 w-10"
                 />
-                <span className="text-md font-bold">{item.temperature} °C</span>
+                <span className="text-md font-bold">
+                  {item.temperature} {isDefaultUnit ? " °C" : " °F"}
+                </span>
               </div>
             );
           })}
