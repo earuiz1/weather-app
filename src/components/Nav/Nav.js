@@ -14,7 +14,7 @@ const Nav = ({ isDefaultUnit, onFetchWeather, city, showWeather }) => {
       <nav className="flex justify-center align-center bg-transparent pt-4 pb-2 px-4 gap-20">
         <div className="flex items-center gap-2">
           <TiWeatherPartlySunny className="text-white" size={60} />
-          <h1 className="lg:text-6xl md:text-6xl text-4xl text-slate-50 font-extrabold">
+          <h1 className="lg:text-6xl md:text-6xl text-3xl text-slate-50 font-extrabold">
             Weather App
           </h1>
         </div>
